@@ -2,24 +2,25 @@ import pandas as pd
 
 libreria = pd.read_csv("data/datos_libros.csv")
 
-print("A.A.B\n APLICACION ADMINISTRATIVA PARA BIBLIOTECAS")
+print("A.A.B\nAPLICACION ADMINISTRATIVA PARA BIBLIOTECAS")
 
 # 1. Se piden datos del libro
 
-titulo = input("ingresa el titulo:")
-autor = input("ingresa el autor:")
-anio = input("ingresa el año de publicacion:")
-editorial = input("ingresa el nombre de la editorial:")
-
+titulo = input("Ingresa el titulo:")
+autor = input("Ingresa el autor:")
+anio = input("Ingresa el año de publicacion:")
+lugar = input("Ingresa lugar de edicion:")
+editorial = input("Ingresa el nombre de la editorial:")
+no_edicion = input("Ingresa numero de edicion:")
 # 2. Se consigue el último ID en el dataframe
 
 ultimo_id = libreria["ID"].iloc[-1]
-id_int = int(ultimo_id[2:])
-nuevo_id = f"LG{id_int+1:04d}"
+id_int = int(ultimo_id[3:])
+nuevo_id = f"BJG{id_int+1:04d}"
 
 # 3. Se crea un diccionario con el nuevo libro
 
-nuevo_libro = {"ID" : nuevo_id, "TITULO" : titulo, "AUTOR" : autor, "AÑO" : anio, "EDITORIAL" : editorial}
+nuevo_libro = {"ID" : nuevo_id, "TITULO" : titulo, "AUTOR" : autor, "AÑO" : anio, "LUGAR" : lugar, "EDITORIAL" : editorial, "No EDICION" : no_edicion}
 
 # 4. Añade el libro al dataframe
 

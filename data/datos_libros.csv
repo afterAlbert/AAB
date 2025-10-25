@@ -1,3 +1,5 @@
-ID,TITULO,AUTOR,AÑO,EDITORIAL
-LG0001,Fanstamagoriana,VV.AA,2007,El Aleph Editores
-LG0002,Antologia de la poesia norteamericana,VV.AA,2007,Fund. Ed. el perro y la rana
+ID,TITULO,AUTOR,AÑO,LUGAR,EDITORIAL,No EDICION
+BJG0001,Fanstamagoriana,VV.AA,2007,Barcelona,El Aleph Editores,1ra
+BJG0002,Antologia de la poesia norteamericana,VV.AA,2007,Caracas,Fund. Ed. el perro y la rana,1ra
+BJG0003,La literatura norteamericana,Izzo Carlo,1971,Bs.As,Losada,1ra
+BJG0004,Literatura inglesa del siglo XX,Revol Enrique Luis,1973,Bs.As,Editorial Columbia,1ra
