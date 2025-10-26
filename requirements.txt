@@ -1,1 +1,4 @@
-Libraries Python: Pandas
+Python packages: Pandas
+
+Install packages on Arch linux:
+pacman -S python-pandas

@@ -1,34 +1,49 @@
+#Importamos el paquete de pandas
 import pandas as pd
 
-libreria = pd.read_csv("data/datos_libros.csv")
+# Se carga el inventario en una variable
+inventario = pd.read_csv("data/inventario.csv")
 
+#Titulo del programa en pantalla
 print("A.A.B\nAPLICACION ADMINISTRATIVA PARA BIBLIOTECAS")
 
-# 1. Se piden datos del libro
+# Funcion de ingreso de libros
+def ingresar_libro(inv, guardar):
+    # 1. Se inician las variables: variable de ID, diccionario con info. del libro y la variable de ingreso
+    ultimo_id = inv["ID"].iloc[-1]
+    id_int = int(ultimo_id[3:])
+    nuevo_id = f"BJG{id_int+1:04d}"
 
-titulo = input("Ingresa el titulo:")
-autor = input("Ingresa el autor:")
-anio = input("Ingresa el año de publicacion:")
-lugar = input("Ingresa lugar de edicion:")
-editorial = input("Ingresa el nombre de la editorial:")
-no_edicion = input("Ingresa numero de edicion:")
-# 2. Se consigue el último ID en el dataframe
+    nuevo_libro = {"ID" : nuevo_id, "TITULO" : False, "AUTOR" : False, "AÑO" : False, "LUGAR" : False, "EDITORIAL" : False, "No EDICION" : False}
+    
+    ingreso = True
+    # 2. Convierte en una lista las claves del diccionario y empieza el bucle salteando la clave ID
+    for i in list(nuevo_libro.keys())[1:]:
+        # 3. Se añade un valor a cada clave o se cancela mediante el comando "fin"
+        nuevo_libro[i] = input(f"Ingresa {i} o escribe 'fin' para salir:")
+        if nuevo_libro[i] == "fin":
+            # 3.1 Se cancela el ingreso y se rompe el bucle
+            ingreso = False
+            break
+    # 4. Se 
+    guardar(ingreso, inv, nuevo_libro)
 
-ultimo_id = libreria["ID"].iloc[-1]
-id_int = int(ultimo_id[3:])
-nuevo_id = f"BJG{id_int+1:04d}"
+# Funcion para guardar la información en un archivo CSV
+def guardar_ingreso(ingreso, inv, nl):
+    # Si la varible de ingreso es positiva, entonces se carga el libro
+    if ingreso == True:
+        # Añade libro al DataFrame
+        inv = pd.concat([inv, pd.DataFrame([nl])], ignore_index=True)
+        
+        # Guarda la información en el archivo CSV
+        inv.to_csv("data/datos_libros.csv", index=False)
+        # Muestra el inventario actual
+        print(inv)
 
-# 3. Se crea un diccionario con el nuevo libro
+        print("Libro cargado con éxito")
+    else:
+        # Se cancela la escritura del CSV
+        print("No se ha cargado ningún libro")
 
-nuevo_libro = {"ID" : nuevo_id, "TITULO" : titulo, "AUTOR" : autor, "AÑO" : anio, "LUGAR" : lugar, "EDITORIAL" : editorial, "No EDICION" : no_edicion}
-
-# 4. Añade el libro al dataframe
-
-libreria = pd.concat([libreria, pd.DataFrame([nuevo_libro])], ignore_index=True)
-
-# 5. Guarda la información en el archivo CSV
-
-libreria.to_csv("data/datos_libros.csv", index=False)
-print(libreria)
-
-print("Libro cargado con éxito")
+# Se llama la función principal
+ingresar_libro(inventario, guardar_ingreso)
